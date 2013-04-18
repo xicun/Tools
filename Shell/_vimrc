@@ -1,0 +1,17 @@
+set nu
+set ts=4
+set softtabstop=4 
+set sw=4
+set hlsearch
+set ic
+set incsearch
+set expandtab
+set autoindent
+set cindent
+set formatoptions=tcro 
+"set nocp
+filetype plugin on
+set encoding=utf8
+set fileencodings=utf8,ucs-bom,cp936
+set fileencoding=utf8
+
