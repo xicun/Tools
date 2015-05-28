@@ -1,0 +1,37 @@
+#!/bin/sh
+#
+# SVN_EDITOR script
+#
+[ $# -eq 1 ] || {
+  echo "usage: $0 file"
+  exit 1
+}
+
+file=$1
+
+
+ed=$VISUAL
+[ -z $ed ] && ed=$EDITOR
+[ -z $ed ] && ed=vim
+
+cat <<ENDTEMPLATE >$file.$
+
+
+Auditors: 
+Fixes: 
+ENDTEMPLATE
+
+cat $file >>$file.$
+sum=`cksum $file.$`
+if $ed $file.$; then
+  newsum=`cksum $file.$`
+ if [ "$newsum" != "$sum" ]; then
+    rm -f $file
+    mv $file.$ $file
+  else
+       rm -f $file.$
+ fi
+else
+  echo "editor \"$ed\" failed"
+  exit 1
+fi
